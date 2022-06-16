@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pydantic = { version = "*", extras = ["dotenv", "email"] }
+opyrator = { version = "*", extras = [] }                  #["dev"]
+streamlit = ">=0.72,<1.4.0"
+typing-utils = "*"
+
+[dev-packages]
+pytest = "*"
+
+[requires]
+python_version = "3.6"
