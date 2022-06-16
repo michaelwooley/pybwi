@@ -1,17 +1,17 @@
 # pybwi  <!-- omit in toc -->
 
 - [Development](#development)
+  - [Quickstart](#quickstart)
+  - [Open questions](#open-questions)
 - [Documentation](#documentation)
 - [License](#license)
 
 ## Development
 
-TODO #2 ⚠️ Update README for `pipenv` use.
 
-Quickstart:
+### Quickstart
 
 ```bash
-
 pyenv virtualenv -f 3.6.12 pybwi
 pyenv activate pybwi
 
@@ -32,7 +32,14 @@ pipenv install
 pipenv run opyrator launch-ui pybwi.opy_app:hello_world
 ```
 
-TODO #4 Add setuppy [pipenv docs](https://pipenv.pypa.io/en/latest/advanced/#pipfile-vs-setup-py)
+### Open questions
+
+1. Relationship of `opyrator` to `streamlit`?
+2. Is `opyrator` necessary?
+3. Ability to add github- or google-based auth.
+
+
+TODO #4 Add setup.py [pipenv docs](https://pipenv.pypa.io/en/latest/advanced/#pipfile-vs-setup-py)
 
 ## Documentation
 
