@@ -1,6 +1,5 @@
 import os
 import subprocess
-import sys
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 from pydantic import BaseModel, Field
@@ -9,20 +8,20 @@ from opyrator.components.types import FileContent
 
 
 class AudioSeparationInput(BaseModel):
-    audio_file: FileContent = Field(..., mime_type="audio/mp3")
+    video_file: FileContent = Field(..., mime_type="video/mp4")
 
 
 class AudioSeparationOutput(BaseModel):
     vocals_file: FileContent = Field(
         ...,
-        mime_type="audio/wav",
+        mime_type="audio/mp3",
         description="The vocals (singing voice) extracted from the audio file.",
     )
-    accompaniment_file: FileContent = Field(
-        ...,
-        mime_type="audio/wav",
-        description="The non-voice parts etracted from the audio file.",
-    )
+    # accompaniment_file: FileContent = Field(
+    #     ...,
+    #     mime_type="audio/wav",
+    #     description="The non-voice parts etracted from the audio file.",
+    # )
 
 
 def separate_audio(input: AudioSeparationInput) -> AudioSeparationOutput:
@@ -31,27 +30,28 @@ def separate_audio(input: AudioSeparationInput) -> AudioSeparationOutput:
     To try it out, you can use this example audio file: [audio_example.mp3](https://github.com/deezer/spleeter/raw/master/audio_example.mp3).
     """
 
-    with NamedTemporaryFile(suffix=".mp3", mode="w+b") as audio_file:
-        audio_file.write(input.audio_file.as_bytes())
-        audio_file.seek(0)
+    if subprocess.run(
+          'which ffmpeg',shell=True).returncode != 0:
+            raise Exception("FFMPEG is not installed")
+
+    with NamedTemporaryFile(suffix=".mp3", mode="w+b") as local_video_file:
+        print(f"Type of {type(input.video_file)} ({input.video_file.__class__.__bases__})")
+        local_video_file.write(input.video_file.as_bytes())
+        local_video_file.seek(0)
+        #  Will delete on context exit
+        print(f"File is: {local_video_file.name}")
         with TemporaryDirectory() as tmp_dir:
+            vocals_file = os.path.join(tmp_dir, "sample.mp3")
 
             subprocess.run(
-                sys.executable
-                + ' -m spleeter separate -p spleeter:2stems --filename_format "{instrument}.{codec}" -o '
-                + f"{tmp_dir} {audio_file.name}",
-                shell=True,
+            f'ffmpeg -v error -i {local_video_file.name} -map 0:a  {vocals_file}'
+            ,                shell=True,
             )
 
-            vocals_file = None
 
-            with open(os.path.join(tmp_dir, "vocals.wav"), "rb") as f:
-                vocals_file = f.read()
-
-            accompaniment_file = None
-            with open(os.path.join(tmp_dir, "accompaniment.wav"), "rb") as f:
-                accompaniment_file = f.read()
+            with open(vocals_file, "rb") as f:
+                vocals_bytes = f.read()
 
             return AudioSeparationOutput(
-                vocals_file=vocals_file, accompaniment_file=accompaniment_file
+                vocals_file=vocals_bytes
             )
