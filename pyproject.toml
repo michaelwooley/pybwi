@@ -6,6 +6,7 @@ authors = ["Michael Wooley <wm.wooley@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.6.1,<4.0"
+pydantic = { version = "^1.9.1", extras = ["dotenv", "email"] }
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
