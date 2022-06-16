@@ -6,25 +6,33 @@
 
 ## Development
 
+TODO #2 ⚠️ Update README for `pipenv` use.
+
 Quickstart:
 
 ```bash
-pyenv install 3.6.12 -s
+
 pyenv virtualenv -f 3.6.12 pybwi
 pyenv activate pybwi
 
-g clone [...]
+git clone git@github.com:michaelwooley/pybwi.git
 
 cd pybwi
 
-# Set up pyenv
-poetry env use $(which python)
-poetry env info --path # Should enc with: /**/.pyenv/versions/3.6.12/envs/pybwi
+pyenv install 3.6.12 -s
+pyenv local 3.6.12
 
-poetry install
-
-poetry run pytest
+pipenv --python $(pyenv which python)
+pipenv install
 ```
+
+**Launch the UI:**
+
+```bash
+pipenv run opyrator launch-ui pybwi.opy_app:hello_world
+```
+
+TODO #4 Add setuppy [pipenv docs](https://pipenv.pypa.io/en/latest/advanced/#pipfile-vs-setup-py)
 
 ## Documentation
 
