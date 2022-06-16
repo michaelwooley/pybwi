@@ -8,7 +8,6 @@
 
 ## Development
 
-
 ### Quickstart
 
 ```bash
@@ -37,7 +36,6 @@ pipenv run opyrator launch-ui pybwi.opy_app:hello_world
 1. Relationship of `opyrator` to `streamlit`?
 2. Is `opyrator` necessary?
 3. Ability to add github- or google-based auth.
-
 
 TODO #4 Add setup.py [pipenv docs](https://pipenv.pypa.io/en/latest/advanced/#pipfile-vs-setup-py)
 
