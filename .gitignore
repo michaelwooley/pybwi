@@ -95,3 +95,5 @@ hs_err_pid*
 temp/*
 .DS_Store
 .env*
+data/int/
+scratch/

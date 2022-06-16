@@ -11,6 +11,12 @@ typing-utils = "*"
 
 [dev-packages]
 pytest = "*"
+black = ">=20.0.0,<22.3.0"
+ipython = "*"
+click = ">8.0.0"
 
 [requires]
-python_version = "3.6"
+python_version = "^3.6"
+
+[pipenv]
+allow_prereleases = false
