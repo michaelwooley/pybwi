@@ -36,6 +36,7 @@ pipenv run opyrator launch-ui pybwi.opy_app:hello_world
 1. Relationship of `opyrator` to `streamlit`?
 2. Is `opyrator` necessary?
 3. Ability to add github- or google-based auth.
+4. Why are some of the parameters in the sidebar? ([Streamlit handles this explicitly.](https://docs.streamlit.io/knowledge-base/components/add-component-sidebar))
 
 TODO #4 Add setup.py [pipenv docs](https://pipenv.pypa.io/en/latest/advanced/#pipfile-vs-setup-py)
 
